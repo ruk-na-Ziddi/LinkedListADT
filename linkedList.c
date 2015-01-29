@@ -48,3 +48,14 @@ void * getElementAt(LinkedList list, int index){
 	}
 	return (*walker).data;
 }
+
+int indexOf(LinkedList list, void *data){
+	Node_ptr walker=list.head;
+	int i=0;
+	while(walker!=0){
+		if((*walker).data==data) return i;
+		walker=(*walker).next;
+		++i;
+	}
+	return -1;
+}

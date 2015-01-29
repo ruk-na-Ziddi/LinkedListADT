@@ -139,3 +139,33 @@ void test_getElementAt_should_give_null_when_index_is_equal_to_count(){
 	free(node2);
 	free(node3);
 }
+
+void test_indexOf_should_give_2_when_given_data_is_3rd_node_data(){
+	int first_node_data=5,second_node_data=6,third_node_data=7;
+	LinkedList list = createList();
+	Node_ptr node1=create_node((void *)&first_node_data);
+	Node_ptr node2=create_node((void *)&second_node_data);
+	Node_ptr node3=create_node((void *)&third_node_data);
+	add_to_list(&list, node1);
+	add_to_list(&list, node2);
+	add_to_list(&list, node3);
+	assertEqual(indexOf(list, &third_node_data), 2);
+	free(node1);
+	free(node2);
+	free(node3);
+}
+
+void test_indexOf_should_give_negtive_1_when_given_data_is_not_found(){
+	int first_node_data=5,second_node_data=6,third_node_data=7,number=10;
+	LinkedList list = createList();
+	Node_ptr node1=create_node((void *)&first_node_data);
+	Node_ptr node2=create_node((void *)&second_node_data);
+	Node_ptr node3=create_node((void *)&third_node_data);
+	add_to_list(&list, node1);
+	add_to_list(&list, node2);
+	add_to_list(&list, node3);
+	assertEqual(indexOf(list, &number), -1);
+	free(node1);
+	free(node2);
+	free(node3);
+}
