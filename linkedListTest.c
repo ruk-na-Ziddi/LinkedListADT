@@ -82,3 +82,29 @@ void test_travese_should_increment_every_node_data_of_list_by_one(){
 	free(node1);
 	free(node2);
 }
+
+void test_getElementAt_should_give_the_data_for_given_index(){
+	int first_node_data=5,second_node_data=6;
+	LinkedList list = createList();
+	Node_ptr node1=create_node((void *)&first_node_data);
+	Node_ptr node2=create_node((void *)&second_node_data);
+	add_to_list(&list, node1);
+	add_to_list(&list, node2);
+	assertEqual(*((int *)getElementAt(list, 1)), 6);
+	free(node1);
+	free(node2);
+}
+
+void test_getElementAt_should_give_the_data_for_given_index_indexis_2(){
+	int first_node_data=5,second_node_data=6,third_node_data=7;
+	LinkedList list = createList();
+	Node_ptr node1=create_node((void *)&first_node_data);
+	Node_ptr node2=create_node((void *)&second_node_data);
+	Node_ptr node3=create_node((void *)&third_node_data);
+	add_to_list(&list, node1);
+	add_to_list(&list, node2);
+	add_to_list(&list, node3);
+	assertEqual(*((int *)getElementAt(list, 2)), 7);
+	free(node1);
+	free(node2);
+}
