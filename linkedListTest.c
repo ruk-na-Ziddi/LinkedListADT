@@ -204,7 +204,7 @@ void test_deleteElementAt_should_delete_the_first_node(){
 }
 
 void test_asArray_puts_all_node_datas_in_an_array(){
-	int first_node_data=5,second_node_data=6,third_node_data=7,no_of_ele;
+	int first_node_data=5,second_node_data=6,third_node_data=7;
 	int *array[3];
 	LinkedList list = createList();
 	Node_ptr node1=create_node((void *)&first_node_data);
@@ -227,7 +227,7 @@ int greter_than_4(void *data){
 }
 
 void test_filter_puts_only_greter_than_4_node_data_in_filtered_list(){
-	int first_node_data=5,second_node_data=6,third_node_data=7,no_of_ele;
+	int first_node_data=5,second_node_data=6,third_node_data=7;
 	LinkedList *filteredList;
 	LinkedList list = createList();
 	Node_ptr node1=create_node((void *)&first_node_data);
