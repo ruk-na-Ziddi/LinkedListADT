@@ -73,11 +73,31 @@ void * deleteElementAt(LinkedList *list, int index){
 		if(i==index-1){
 			runner=walker->next;
 			walker->next=walker->next->next;
-			++i;
 		}else{
 			walker=walker->next;
-			++i;
 		}
+		++i;
 	}
 	return runner->data;
+}
+
+int asArray(LinkedList list, void **array){
+	int i;
+	Node_ptr walker=list.head;
+	for (i=0;i<list.count;i++){
+		array[i]=walker->data;
+		walker=walker->next;
+	}
+	return list.count;
+}
+
+LinkedList * filter(LinkedList list, int (*fn)(void *data)){
+	int i;
+	LinkedList *filteredList=calloc(sizeof(LinkedList),1);
+	Node* walker = list.head;
+	for(i=0;i<list.count;++i){
+		if(fn(walker->data)) add_to_list(filteredList, walker);
+		walker=walker->next;
+	}
+	return filteredList;
 }

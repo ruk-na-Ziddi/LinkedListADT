@@ -202,3 +202,46 @@ void test_deleteElementAt_should_delete_the_first_node(){
 	free(node2);
 	free(node3);
 }
+
+void test_asArray_puts_all_node_datas_in_an_array(){
+	int first_node_data=5,second_node_data=6,third_node_data=7,no_of_ele;
+	int *array[3];
+	LinkedList list = createList();
+	Node_ptr node1=create_node((void *)&first_node_data);
+	Node_ptr node2=create_node((void *)&second_node_data);
+	Node_ptr node3=create_node((void *)&third_node_data);
+	add_to_list(&list, node1);
+	add_to_list(&list, node2);
+	add_to_list(&list, node3);
+	assertEqual(asArray(list, (void **)array), 3);
+	assertEqual(*(array[0]), first_node_data);
+	assertEqual(*(array[1]), second_node_data);
+	assertEqual(*(array[2]), third_node_data);
+	free(node1);
+	free(node2);
+	free(node3);
+}
+
+int greter_than_4(void *data){
+	return *(int*)data > 4;
+}
+
+void test_filter_puts_only_greter_than_4_node_data_in_filtered_list(){
+	int first_node_data=5,second_node_data=6,third_node_data=7,no_of_ele;
+	LinkedList *filteredList;
+	LinkedList list = createList();
+	Node_ptr node1=create_node((void *)&first_node_data);
+	Node_ptr node2=create_node((void *)&second_node_data);
+	Node_ptr node3=create_node((void *)&third_node_data);
+	add_to_list(&list, node1);
+	add_to_list(&list, node2);
+	add_to_list(&list, node3);
+	filteredList=filter(list, greter_than_4);
+	assertEqual(*((int *)filteredList->head->data), first_node_data);
+	assertEqual(*((int *)filteredList->tail->data), third_node_data);
+	assertEqual(indexOf(*filteredList, &second_node_data), 1);
+	free(filteredList);
+	free(node1);
+	free(node2);
+	free(node3);
+}
