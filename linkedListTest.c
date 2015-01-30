@@ -179,7 +179,7 @@ void test_deleteElementAt_should_delete_the_node_at_given_index(){
 	add_to_list(&list, node1);
 	add_to_list(&list, node2);
 	add_to_list(&list, node3);
-	deleteElementAt(&list, 1);
+	assertEqual(*((int *)deleteElementAt(&list, 1)), second_node_data);
 	assertEqual(indexOf(list, &third_node_data), 1);
 	free(node1);
 	free(node2);
@@ -195,9 +195,27 @@ void test_deleteElementAt_should_delete_the_first_node(){
 	add_to_list(&list, node1);
 	add_to_list(&list, node2);
 	add_to_list(&list, node3);
-	deleteElementAt(&list, 0);
+	assertEqual(*((int *)deleteElementAt(&list, 0)), first_node_data);
 	assertEqual(indexOf(list, &second_node_data), 0);
 	assertEqual(indexOf(list, &third_node_data), 1);
+	free(node1);
+	free(node2);
+	free(node3);
+}
+
+void test_deleteElementA_should_delete_the_first_node(){
+	int first_node_data=5,second_node_data=6,third_node_data=7;
+	LinkedList list = createList();
+	Node_ptr node1=create_node((void *)&first_node_data);
+	Node_ptr node2=create_node((void *)&second_node_data);
+	Node_ptr node3=create_node((void *)&third_node_data);
+	add_to_list(&list, node1);
+	add_to_list(&list, node2);
+	add_to_list(&list, node3);
+	assertEqual(*((int *)deleteElementAt(&list, 2)), third_node_data);
+	assertEqual(indexOf(list, &second_node_data), 1);
+	assertEqual(indexOf(list, &first_node_data), 0);
+	assertEqual(*((int *)list.tail->data), second_node_data);
 	free(node1);
 	free(node2);
 	free(node3);
