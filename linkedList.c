@@ -74,7 +74,6 @@ void * getNodeAt(LinkedList list, int index){
 void * deleteElementAt(LinkedList *list, int index){
 	Node_ptr walker=list->head,runner;
 	int i=0;
-	if(index>=list->count || index<0) return NULL;
 	if(index==0){
 		runner=walker;
 		list->head=list->head->next;
@@ -89,12 +88,12 @@ void * deleteElementAt(LinkedList *list, int index){
 		if(i==index-1){
 			runner=walker->next;
 			walker->next=walker->next->next;
-		}else{
-			walker=walker->next;
+			return runner->data;
 		}
+		walker=walker->next;
 		++i;
 	}
-	return runner->data;
+	return NULL;
 }
 
 int asArray(LinkedList list, void **array){
