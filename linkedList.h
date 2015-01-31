@@ -1,14 +1,7 @@
 typedef struct student Student;
 typedef struct list LinkedList;
 typedef struct node Node;
-typedef Node * Node_ptr;
-
-struct student{
-	int id;
-	int score;
-	char *name;
-	Student *next;
-};
+typedef Node* Node_ptr;
 
 struct list{
 	Node_ptr head;
