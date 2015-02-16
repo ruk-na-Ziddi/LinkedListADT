@@ -16,26 +16,31 @@ void test_create_node_sets_given_data_as_nodes_data_and_its_next_to_NULL(){
 	assertEqual((int)(*node).next, 0);
 	free(node);
 }
-
+// void print (void *data){
+// 	printf("list--> %d\n",data );
+// }
 void test_add_to_list_adds_one_node_to_list_and_count_is_1(){
 	int data=5;
 	LinkedList list=createList();
 	Node_ptr node=create_node((void *)&data);
 	add_to_list(&list,node);
 	assertEqual(*((int *)(*node).data), data);
+	assertEqual(*((int *)(list.head->data)), 5);
+	assertEqual(*((int *)(list.tail->data)), 5);
+	// traverse(list, print);
 	assertEqual(list.count,1);
 	free(node);
 }
 
 void test_add_to_list_can_add_two_nodes_to_list_then_count_is_2(){
-	int data=5;
+	int data=5,data1=6;
 	LinkedList list=createList();
 	Node_ptr node1=create_node((void *)&data);
-	Node_ptr node2=create_node((void *)&data);
+	Node_ptr node2=create_node((void *)&data1);
 	add_to_list(&list, node1);
 	add_to_list(&list, node2);
 	assertEqual(*((int *)(*node1).data), data);
-	assertEqual(*((int *)(*node2).data), data);
+	assertEqual(*((int *)(*node2).data), data1);
 	assertEqual(list.count, 2);
 	free(node1);
 	free(node2);
@@ -219,6 +224,33 @@ void test_deleteElementA_should_delete_the_first_node(){
 	free(node1);
 	free(node2);
 	free(node3);
+}
+
+void test_deleteElement_should_delete_the_only_node(){
+	int first_node_data=5;
+	LinkedList list = createList();
+	Node_ptr node1=create_node((void *)&first_node_data);
+	add_to_list(&list, node1);
+	assertEqual(*((int *)deleteElementAt(&list, 0)), first_node_data);
+	assertEqual(indexOf(list, &first_node_data), -1);
+	assertEqual((int)list.tail, 0);
+	assertEqual((int)list.head, 0);
+	free(node1);
+}
+
+void test_deleteElementA_should_delete_the_second_node_when_only_two_nodes_are_there(){
+	int first_node_data=5,second_node_data=6;
+	LinkedList list = createList();
+	Node_ptr node1=create_node((void *)&first_node_data);
+	Node_ptr node2=create_node((void *)&second_node_data);
+	add_to_list(&list, node1);
+	add_to_list(&list, node2);
+	assertEqual(*((int *)deleteElementAt(&list, 1)), second_node_data);
+	assertEqual(indexOf(list, &first_node_data), 0);
+	assertEqual(*((int *)list.tail->data), first_node_data);
+	assertEqual(*((int *)list.head->data), first_node_data);
+	free(node1);
+	free(node2);
 }
 
 void test_asArray_puts_all_node_datas_in_an_array(){

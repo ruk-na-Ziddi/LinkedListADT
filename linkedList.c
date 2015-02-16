@@ -74,20 +74,34 @@ void * getNodeAt(LinkedList list, int index){
 void * deleteElementAt(LinkedList *list, int index){
 	Node_ptr walker=list->head,runner;
 	int i=0;
-	if(index==0){
+	if(index==0 && list->count>1){
 		runner=walker;
 		list->head=list->head->next;
+		list->count--;
+		return runner->data;
+	}
+	if(index==0 && list->count==1){
+		runner=walker;
+		list->head=NULL;
+		list->tail=NULL;
+		list->count--;
 		return runner->data;
 	}
 	if(index==list->count-1){
 		runner=list->tail;
-		list->tail=getNodeAt(*list, list->count-2);
+		if(list->count>1) list->tail=getNodeAt(*list, list->count-2);
+		if(list->count==1){
+			list->head=NULL;
+			list->tail=NULL;
+		}
+		list->count--;
 		return runner->data;
 	}
 	while(walker!=0){
 		if(i==index-1){
 			runner=walker->next;
 			walker->next=walker->next->next;
+			list->count--;
 			return runner->data;
 		}
 		walker=walker->next;
